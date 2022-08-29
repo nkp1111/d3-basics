@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Diagram</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const svg = d3.select('body').append('svg').attr('width', 500).attr('height', 500).style('background-color', 'yellow')
+    svg.append('circle').attr('r', 200).attr('cx', 250).attr('cy', 250).attr('fill', 'red')
+    svg.append('circle').attr('r', 30).attr('cx', 150).attr('cy', 200).attr('fill', 'white')
+    svg.append('circle').attr('r', 30).attr('cx', 350).attr('cy', 200).attr('fill', 'white')
+  </script>
+</body>
+
+</html>
