@@ -1,5 +1,4 @@
 /* Smiley face */
-import React from 'react'
 
 const width = 500
 const height = 500
