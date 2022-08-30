@@ -1,4 +1,5 @@
 /* Smiley face */
+import React from 'react'
 
 const width = 500
 const height = 500
@@ -33,4 +34,8 @@ svg.append('circle')
   .attr('cx', width / 2 + eyeOffset)
   .attr('cy', height / 3)
   .attr('fill', eyeColor)
+
+console.log(React);
+console.log(ReactDOM);
+
 
