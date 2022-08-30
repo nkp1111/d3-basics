@@ -1,5 +1,6 @@
 /* Smiley face */
 
+
 const width = 500
 const height = 500
 const StrokeWidth = 5
@@ -37,4 +38,6 @@ svg.append('circle')
 console.log(React);
 console.log(ReactDOM);
 
-
+const App = () => {
+  return <></>
+}
