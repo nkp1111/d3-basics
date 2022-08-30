@@ -12,10 +12,28 @@
       width: 100vw;
       height: 100vh;
       margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 50px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .blink {
+      animation: blink linear 5s infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 100%;
+      }
+
+      90% {
+        opacity: 90%;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
   </style>
 </head>
