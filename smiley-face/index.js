@@ -37,7 +37,3 @@ svg.append('circle')
 
 console.log(React);
 console.log(ReactDOM);
-
-const App = () => {
-  return <></>
-}
