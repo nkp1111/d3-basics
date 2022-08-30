@@ -8,6 +8,7 @@ const faceColor = 'yellow'
 const eyeRadius = 50
 const eyeColor = 'black'
 const eyeOffset = 100
+
 const svg = d3.select('body')
   .append('svg')
   .attr('width', width)
@@ -32,3 +33,4 @@ svg.append('circle')
   .attr('cx', width / 2 + eyeOffset)
   .attr('cy', height / 3)
   .attr('fill', eyeColor)
+
