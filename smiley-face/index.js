@@ -35,5 +35,3 @@ svg.append('circle')
   .attr('cy', height / 3)
   .attr('fill', eyeColor)
 
-console.log(React);
-console.log(ReactDOM);
