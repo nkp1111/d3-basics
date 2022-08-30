@@ -1,37 +1,48 @@
 /* Smiley face */
 
-
-const width = 500
-const height = 500
-const StrokeWidth = 5
-const faceRadius = height / 2 - StrokeWidth / 2
+const side = 500
+const width = side
+const height = side
+const StrokeWidth = 10
 const faceColor = 'yellow'
-const eyeRadius = 50
+const eyeRadius = 30
 const eyeColor = 'black'
-const eyeOffset = 100
+const eyeOffsetX = 100
+const eyeOffsetY = -80
+const centerX = width / 2
+const centerY = height / 2
 
 const svg = d3.select('body')
   .append('svg')
   .attr('width', width)
   .attr('height', height)
+  .append('g')
+  .attr('transform', `translate(${centerX}, ${centerY})`)
 
 svg.append('circle')
-  .attr('r', faceRadius)
-  .attr('cx', width / 2)
-  .attr('cy', height / 2)
+  .attr('r', height / 2 - StrokeWidth / 2)
   .attr('fill', faceColor)
   .attr('stroke', 'black')
-  .attr('stroke-width', 5)
+  .attr('stroke-width', StrokeWidth)
 
 svg.append('circle')
   .attr('r', eyeRadius)
-  .attr('cy', height / 3)
+  .attr('cy', eyeOffsetY)
   .attr('fill', eyeColor)
-  .attr('cx', width / 2 - eyeOffset)
+  .attr('cx', - eyeOffsetX)
 
 svg.append('circle')
   .attr('r', eyeRadius)
-  .attr('cx', width / 2 + eyeOffset)
-  .attr('cy', height / 3)
+  .attr('cx', eyeOffsetX)
+  .attr('cy', eyeOffsetY)
   .attr('fill', eyeColor)
 
+
+const mouth = d3.arc()
+  .innerRadius(140)
+  .outerRadius(150)
+  .startAngle(Math.PI * 1 / 2)
+  .endAngle(Math.PI * 3 / 2)
+
+svg.append('path')
+  .attr('d', mouth)
