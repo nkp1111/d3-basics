@@ -63,79 +63,10 @@ svg1.append('path')
 
 
 /* 
-Since arc are created with respect to top-left position at (0,0)
+Since arc is created with respect to top-left position at (0,0)
 So whole face has to shift to align face to its place
 
 Alternatively 
 the g element can be created only for path element 
 and move to required place
-*/
-
-/***************************************
- * Start of svg2
- */
-
-const mouthOffset = 30
-const svg2 = d3.select('body')
-  .append('svg')
-  .attr('width', width)
-  .attr('height', height)
-
-svg2.append('circle')
-  .attr('cx', width / 2)
-  .attr('cy', height / 2)
-  .attr('r', 100)
-  .attr('fill', 'yellow')
-
-// black circle as eye
-svg2.append('circle')
-  .attr('cx', width / 2 + eyeOffsetX / 2)
-  .attr('cy', height / 3)
-  .attr('r', 20)
-  .attr('fill', 'black')
-svg2.append('circle')  // white center 
-  .attr('cx', width / 2 + eyeOffsetX / 2)
-  .attr('cy', height / 3)
-  .attr('r', 10)
-  .attr('fill', 'white')
-  .attr('class', 'blink')
-
-
-// black circle as eye
-svg2.append('circle')
-  .attr('cx', width / 2 - eyeOffsetX / 2)
-  .attr('cy', height / 3)
-  .attr('r', 20)
-  .attr('fill', 'black')
-svg2.append('circle')// white center 
-  .attr('cx', width / 2 - eyeOffsetX / 2)
-  .attr('cy', height / 3)
-  .attr('r', 10)
-  .attr('fill', 'white')
-  .attr('class', 'blink')
-
-const mouth2 = d3.arc()
-  .innerRadius(mouthRadius - mouthOffset)
-  .outerRadius(mouthRadius + mouthWidth - mouthOffset)
-  .startAngle(Math.PI * 0.5)
-  .endAngle(Math.PI * 1.5)
-
-const beard = d3.arc()
-  .innerRadius(mouthRadius)
-  .outerRadius(mouthRadius + mouthWidth + 15)
-  .startAngle(Math.PI * 0.5)
-  .endAngle(Math.PI * 1.5)
-
-svg2.append('g')
-  .attr('transform', `translate(${centerX}, ${centerY})`)
-  .append('path')
-  .attr('d', mouth2)
-
-svg2.append('g')
-  .attr('transform', `translate(${centerX}, ${centerY})`)
-  .append('path')
-  .attr('d', beard)
-
-/***************************************
-* End of svg1
 */
