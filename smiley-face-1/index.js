@@ -52,6 +52,7 @@ const mouth = d3.arc()
   .startAngle(Math.PI * 1 / 2)  // at top position at 0
   .endAngle(Math.PI * 3 / 2)
 
+console.log(mouth)
 // path element to create path 
 svg1.append('path')
   .attr('d', mouth)
@@ -61,12 +62,3 @@ svg1.append('path')
 * End of svg1
 */
 
-
-/* 
-Since arc is created with respect to top-left position at (0,0)
-So whole face has to shift to align face to its place
-
-Alternatively 
-the g element can be created only for path element 
-and move to required place
-*/
