@@ -1,18 +1,14 @@
 const url = 'https://gist.githubusercontent.com/nkp1111/f76b8e2af492dd4fc0fe022821465547/raw/098ee80bd81621cd1effa3a2bbf0bc1768eab5fa/cssColor.csv'
 
-// fetch(url)
-//   .then((res) => res.text())
-//   .then((data) => console.log(data))
 
-const fetchData = async (url) => {
-  const response = await fetch(url)
-  const data = await response.text()
-  const newArr = d3.csvParse(data)
-  // const arr = data.split('\n')
-  // const newArr = arr.map(item => {
-  //   return item.split(',')
-  // }).splice(1,)
+// const fetchData = async (url) => {
+//   const response = await fetch(url)
+//   const data = await response.text()
+//   const newArr = d3.csvParse(data)
+// }
 
+d3.csv(url).then(data => {
+  const newArr = data
   const size = window.innerWidth / 10
   const textCoor = 25
 
@@ -33,7 +29,7 @@ const fetchData = async (url) => {
     .attr('y', textCoor)
     .style('font-weight', 700)
     .style('font-size', 30)
-}
+})
 
-fetchData(url)
+// fetchData(url)
 
