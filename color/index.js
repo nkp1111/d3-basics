@@ -14,7 +14,6 @@ const fetchData = async (url) => {
     return item.split(',')
   }).splice(1,)
 
-  console.log(window.innerWidth)
   const size = window.innerWidth / 10
   const textCoor = 25
 
@@ -31,7 +30,7 @@ const fetchData = async (url) => {
     .text(d => d[0])
     .attr('x', textCoor)
     .attr('y', textCoor)
-    .style('font-weight', 900)
+    .style('font-weight', 700)
     .style('font-size', 30)
 }
 
