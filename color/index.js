@@ -9,10 +9,9 @@ const url = 'https://gist.githubusercontent.com/nkp1111/f76b8e2af492dd4fc0fe0228
 
 d3.csv(url).then(data => {
   const newArr = data
-  const width = window.innerWidth
+  const width = window.innerWidth / 2
   const height = window.innerHeight
   const recHeight = height / newArr.length
-  console.log(newArr[10]['RGB hex value']);
 
   const svg = d3.select('body')
     .append('svg')
@@ -29,6 +28,26 @@ d3.csv(url).then(data => {
     .attr('y', (d, i) => i * recHeight)
     .attr('fill', (d) => d['RGB hex value'])
 
+  const svg2 = d3.select('body')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+
+  const pieArc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(width / 2)
+
+  svg2.append('g')
+    .style('transform', 'translate(50%, 50%)')
+    .selectAll('path')
+    .data(newArr)
+    .enter()
+    .append('path')
+    .attr('d', (d, i) => pieArc({
+      startAngle: i / newArr.length * 2 * Math.PI,
+      endAngle: (i + 1) / newArr.length * 2 * Math.PI
+    }))
+    .attr('fill', (d) => d['RGB hex value'])
 })
 
 // fetchData(url)
