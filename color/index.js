@@ -9,7 +9,7 @@ const url = 'https://gist.githubusercontent.com/nkp1111/f76b8e2af492dd4fc0fe0228
 
 d3.csv(url).then(data => {
   const newArr = data
-  const width = window.innerWidth / 2
+  const width = window.innerWidth
   const height = window.innerHeight
   const recHeight = height / newArr.length
 
@@ -30,8 +30,14 @@ d3.csv(url).then(data => {
 
   const svg2 = d3.select('body')
     .append('svg')
-    .attr('width', width)
-    .attr('height', height)
+    .style('position', 'absolute')
+    .attr('width', width / 3)
+    .attr('height', width / 3)
+    .style('border-radius', '50%')
+    .style('top', height / 2)
+    .style('left', width / 2)
+    .style('transform', 'translate(-50%, -50%)')
+    .style('box-shadow', '5px 5px 25px 25px rgba(255, 255, 255, 0.4)')
 
   const pieArc = d3.arc()
     .innerRadius(0)
