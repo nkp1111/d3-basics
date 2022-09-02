@@ -9,26 +9,26 @@ const url = 'https://gist.githubusercontent.com/nkp1111/f76b8e2af492dd4fc0fe0228
 
 d3.csv(url).then(data => {
   const newArr = data
-  const size = window.innerWidth / 10
-  const textCoor = 25
+  const width = window.innerWidth
+  const height = window.innerHeight
+  const recHeight = height / newArr.length
+  console.log(newArr[10]['RGB hex value']);
 
-  d3.select('body')
-    .selectAll('svg')
+  const svg = d3.select('body')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+
+  svg.selectAll('rect')
     .data(newArr)
     .enter()
-    .append('svg')
-    .style('margin', '0')
-    .attr('width', size)
-    .attr('height', size)
-    .style('background-color', (d) => d['hex-value'])
-    // .style('background-color', (d) => d[1])
-    .append('title')
-    .text(d => d['keyword'])
-    // .text(d => d[0])
-    .attr('x', textCoor)
-    .attr('y', textCoor)
-    .style('font-weight', 700)
-    .style('font-size', 30)
+    .append('rect')
+    .attr('width', width)
+    .attr('height', recHeight)
+    .attr('x', 0)
+    .attr('y', (d, i) => i * recHeight)
+    .attr('fill', (d) => d['RGB hex value'])
+
 })
 
 // fetchData(url)
