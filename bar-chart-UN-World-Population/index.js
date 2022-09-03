@@ -5,7 +5,7 @@ d3.csv(url)
     const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
-    const padding = 50
+    const margin = { top: 50, bottom: 50, left: 50, right: 50 }
 
     console.log(dataset[0]);
 
@@ -16,13 +16,15 @@ d3.csv(url)
 
     const xScale = d3.scaleLinear()
       .domain([0, d3.max(dataset, d => +d['2020'])])
-      .range([padding, width - padding])
+      .range([0, width - margin.right])
 
     const yScale = d3.scaleBand()
       .domain(dataset.map(d => d['Country']))
-      .range([padding, height])
+      .range([0, height - margin.bottom])
 
-    svg.selectAll('rect')
+    svg.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .selectAll('rect')
       .data(dataset)
       .enter()
       .append('rect')
