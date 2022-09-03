@@ -2,7 +2,7 @@ const url = 'https://gist.githubusercontent.com/Tom-S82/1b76477754ddd9c379cfc002
 
 d3.csv(url)
   .then(data => {
-    const dataset = data.slice(0, 10)
+    const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
     const padding = 50
@@ -22,7 +22,6 @@ d3.csv(url)
       .domain(dataset.map(d => d['Country']))
       .range([padding, height])
 
-    console.log(yScale.bandwidth());
     svg.selectAll('rect')
       .data(dataset)
       .enter()
