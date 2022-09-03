@@ -5,9 +5,9 @@ d3.csv(url)
     const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
-    const margin = { top: 50, bottom: 50, left: 50, right: 50 }
+    const margin = { top: 20, bottom: 20, left: 20, right: 20 }
 
-    console.log(dataset[0]);
+    // console.log(dataset[0]);
 
     const svg = d3.select('body')
       .append('svg')
@@ -16,11 +16,11 @@ d3.csv(url)
 
     const xScale = d3.scaleLinear()
       .domain([0, d3.max(dataset, d => +d['2020'])])
-      .range([0, width - margin.right])
+      .range([0, width - margin.right - margin.left])
 
     const yScale = d3.scaleBand()
       .domain(dataset.map(d => d['Country']))
-      .range([0, height - margin.bottom])
+      .range([0, height - margin.bottom - margin.top])
 
     svg.append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -33,6 +33,19 @@ d3.csv(url)
       .attr('width', (d) => xScale(+d['2020']))
       .attr('height', yScale.bandwidth())
 
+    svg.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .selectAll('line')
+      .data(xScale.ticks())
+      .enter()
+      .append('g')
+      .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
+      .append('line')
+      .attr('y2', height - margin.bottom - margin.top)
+      .attr('stroke', 'black')
+      .append('text')
+      .text((d) => d)
+      .attr('y', (d) => height - margin.bottom)
 
 
   })
