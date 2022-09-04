@@ -6,14 +6,19 @@ d3.csv(url)
     const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
-    const margin = { top: 20, bottom: 20, left: 210, right: 20 }
+    const margin = { top: 20, bottom: 60, left: 210, right: 20 }
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.left - margin.right
-    const xValue = d => +d['2020']
+    const labelOffset = 40
+    const xValue = d => +d['2020'] * 1000
     const yValue = d => d['Country']
 
     // console.log(dataset[0]);
 
+    //formatting number
+    const numberFormat = d3.format(".2s")
+
+    // creating svg
     const svg = d3.select('body')
       .append('svg')
       .attr('width', width)
@@ -31,13 +36,14 @@ d3.csv(url)
       .paddingInner(0.17)
 
     // tick marks for x-axis(population) 
-    svg.append('g')
+    const main = svg.append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
-      .selectAll('line')
+
+    // tick marks into lines
+    main.selectAll('line')
       .data(xScale.ticks())
       .enter()
       .append('g')
-      .attr('class', 'special')
       .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
       .append('line')
       .attr('y2', innerHeight)
@@ -55,27 +61,26 @@ d3.csv(url)
       .attr('y', (d) => yScale(yValue(d)))
       .attr('width', (d) => xScale(xValue(d)))
       .attr('height', yScale.bandwidth())
+      .append('title')
+      .text((d) => numberFormat(xValue(d)).replace('G', 'B'))
 
-    //population text
-    svg.select('.special')
-      .append('g')
+    //population value text
+    main.append('g')
       .attr('class', 'tick')
       .selectAll('text')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
       .data(xScale.ticks())
       .enter()
       .append('text')
-      .style('text-anchor', 'middle')
       .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
-      .text((d) => d)
+      .text((d) => numberFormat(d).replace('G', 'B'))
       .attr('y', innerHeight + 3)
       .attr('dy', '0.71em')
 
     // text for y-axis(country) 
 
     // console.log(yScale.domain())
-    svg.select('.special')
-      .append('g')
+    main.append('g')
       .attr('class', 'tick')
       .selectAll('text')
       .data(yScale.domain())
@@ -87,5 +92,11 @@ d3.csv(url)
       .attr('y', (d) => yScale.bandwidth() / 2)
       .attr('dy', '0.32em')
       .style('text-anchor', 'end')
+
+    main.append('text')
+      .attr('class', 'axis-bottom')
+      .text('Population')
+      .attr('x', innerWidth / 2)
+      .attr('y', innerHeight + labelOffset)
 
   })

@@ -15,5 +15,16 @@ body {
 }
 
 .tick text {
-  stroke: #635F5D;
+  fill: #635F5D;
+  text-anchor: middle;
+}
+
+.axis-bottom {
+  text-anchor: middle;
+  font-size: 2em;
+  fill: #635F5D;
+}
+
+rect {
+  cursor: pointer;
 }
