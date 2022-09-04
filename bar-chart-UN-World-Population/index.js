@@ -2,12 +2,15 @@ const url = 'https://gist.githubusercontent.com/Tom-S82/1b76477754ddd9c379cfc002
 
 d3.csv(url)
   .then(data => {
+
     const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
     const margin = { top: 20, bottom: 20, left: 200, right: 20 }
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.left - margin.right
+    const xValue = d => +d['2020']
+    const yValue = d => d['Country']
 
     // console.log(dataset[0]);
 
@@ -18,12 +21,12 @@ d3.csv(url)
 
     //x-scale
     const xScale = d3.scaleLinear()
-      .domain([0, d3.max(dataset, d => +d['2020'])])
+      .domain([0, d3.max(dataset, xValue)])
       .range([0, innerWidth])
 
     //y-scale
     const yScale = d3.scaleBand()
-      .domain(dataset.map(d => d['Country']))
+      .domain(dataset.map(yValue))
       .range([0, innerHeight])
 
     // rectangle bars
@@ -34,8 +37,8 @@ d3.csv(url)
       .enter()
       .append('rect')
       .attr('x', 0)
-      .attr('y', (d) => yScale(d['Country']))
-      .attr('width', (d) => xScale(+d['2020']))
+      .attr('y', (d) => yScale(yValue(d)))
+      .attr('width', (d) => xScale(xValue(d)))
       .attr('height', yScale.bandwidth())
 
     // tick marks for x-axis(population) 
