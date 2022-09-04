@@ -6,6 +6,8 @@ d3.csv(url)
     const width = 800
     const height = 400
     const margin = { top: 20, bottom: 20, left: 20, right: 20 }
+    const innerHeight = height - margin.top - margin.bottom
+    const innerWidth = width - margin.left - margin.right
 
     // console.log(dataset[0]);
 
@@ -16,11 +18,11 @@ d3.csv(url)
 
     const xScale = d3.scaleLinear()
       .domain([0, d3.max(dataset, d => +d['2020'])])
-      .range([0, width - margin.right - margin.left])
+      .range([0, innerWidth])
 
     const yScale = d3.scaleBand()
       .domain(dataset.map(d => d['Country']))
-      .range([0, height - margin.bottom - margin.top])
+      .range([0, innerHeight])
 
     svg.append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -39,13 +41,21 @@ d3.csv(url)
       .data(xScale.ticks())
       .enter()
       .append('g')
+      .attr('class', 'special')
       .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
       .append('line')
-      .attr('y2', height - margin.bottom - margin.top)
+      .attr('y2', innerHeight)
       .attr('stroke', 'black')
+
+    svg.select('.special').
+      selectAll('text')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .data(xScale.ticks())
+      .enter()
       .append('text')
+      .style('text-anchor', 'middle')
+      .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
       .text((d) => d)
-      .attr('y', (d) => height - margin.bottom)
-
-
+      .attr('y', innerHeight + 3)
+      .attr('dy', '0.71em')
   })
