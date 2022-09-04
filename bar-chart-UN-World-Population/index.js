@@ -6,7 +6,7 @@ d3.csv(url)
     const dataset = data.slice(0, 10) // for 10 most populated country
     const width = 800
     const height = 400
-    const margin = { top: 20, bottom: 20, left: 200, right: 20 }
+    const margin = { top: 20, bottom: 20, left: 210, right: 20 }
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.left - margin.right
     const xValue = d => +d['2020']
@@ -28,18 +28,7 @@ d3.csv(url)
     const yScale = d3.scaleBand()
       .domain(dataset.map(yValue))
       .range([0, innerHeight])
-
-    // rectangle bars
-    svg.append('g')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`)
-      .selectAll('rect')
-      .data(dataset)
-      .enter()
-      .append('rect')
-      .attr('x', 0)
-      .attr('y', (d) => yScale(yValue(d)))
-      .attr('width', (d) => xScale(xValue(d)))
-      .attr('height', yScale.bandwidth())
+      .paddingInner(0.17)
 
     // tick marks for x-axis(population) 
     svg.append('g')
@@ -52,11 +41,26 @@ d3.csv(url)
       .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
       .append('line')
       .attr('y2', innerHeight)
-      .attr('stroke', 'black')
+      .attr('stroke', '#c0c0bb')
+
+    // rectangle bars
+    svg.append('g')
+      .attr('class', 'mark')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .selectAll('rect')
+      .data(dataset)
+      .enter()
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', (d) => yScale(yValue(d)))
+      .attr('width', (d) => xScale(xValue(d)))
+      .attr('height', yScale.bandwidth())
 
     //population text
-    svg.select('.special').
-      selectAll('text')
+    svg.select('.special')
+      .append('g')
+      .attr('class', 'tick')
+      .selectAll('text')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
       .data(xScale.ticks())
       .enter()
@@ -72,6 +76,7 @@ d3.csv(url)
     // console.log(yScale.domain())
     svg.select('.special')
       .append('g')
+      .attr('class', 'tick')
       .selectAll('text')
       .data(yScale.domain())
       .enter()
