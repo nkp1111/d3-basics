@@ -67,9 +67,9 @@ d3.csv(url)
       .attr('class', 'tick')
       .call(xAxis)
 
-
     // y-axis 
     const yAxis = d3.axisLeft(yScale)
+
     main.append('g')
       .attr('class', 'tick')
       .call(yAxis)
@@ -96,7 +96,7 @@ d3.csv(url)
       .append('line')
       .attr('x2', innerWidth)
 
-    // circle 
+    // circle
     main.append('g')
       .attr('class', 'mark')
       .selectAll('circle')
@@ -134,3 +134,4 @@ d3.csv(url)
       .attr('d', line)
 
   })
+
