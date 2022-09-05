@@ -15,14 +15,26 @@ d3.csv(url)
     console.log('initial-dataset: ', dataset)
     // data contains: petal_length, petal_width, sepal_length, sepal_width, species
 
+    // svg dimension
     const width = 800
     const height = 400
-    const margin = { top: 20, bottom: 20, left: 50, right: 20 }
+    const margin = { top: 20, bottom: 45, left: 100, right: 20 }
+
+    // main-dimension for svg-child element
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.left - margin.right
-    const labelOffset = 40
-    const xValue = d => d.petal_width
-    const yValue = d => d.petal_length
+
+    // shorthand arrow function
+    const xValue = d => d.sepal_length
+    const yValue = d => d.sepal_width
+
+    // label text
+    const xAxisLabel = 'Sepal Length'
+    const yAxisLabel = 'Sepal Width'
+
+    // label text offset
+    const xlabelOffset = 35
+    const ylabelOffset = 35
 
     const svg = d3.select('body')
       .append('svg')
@@ -33,6 +45,7 @@ d3.csv(url)
     const xScale = d3.scaleLinear()
       .domain(d3.extent(dataset, xValue))
       .range([0, innerWidth])
+      .nice()
 
     // y-scale
     const yScale = d3.scaleLinear()
@@ -41,31 +54,68 @@ d3.csv(url)
 
     // x-axis
     const xAxis = d3.axisBottom(xScale)
+    svg.append('g')
+      .attr('transform', `translate(${margin.left}, ${innerHeight + margin.top})`)
+      .call(xAxis)
 
     // y-axis
     const yAxis = d3.axisLeft(yScale)
-
-    svg.append('g')
-      .attr('transform', `translate(${margin.left}, ${innerHeight})`)
-      .call(xAxis)
-
-    svg.append('g')
-      .attr('transform', `translate(${margin.left}, 0)`)
-      .call(yAxis)
-
     svg.append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .call(yAxis)
+
+    // to apply margin
+    const main = svg.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+    // x-axis tick marks- vertical lines
+    main.append('g')
+      .selectAll('line')
+      .data(xScale.ticks())
+      .enter()
+      .append('g')
+      .attr('transform', (d) => `translate(${xScale(d)}, 0)`)
+      .append('line')
+      .attr('y2', innerHeight)
+      .attr('stroke', '#c0c0bb')
+
+    // y-axis tick marks- horizontal lines
+    main.append('g')
+      .selectAll('line')
+      .data(yScale.ticks())
+      .enter()
+      .append('g')
+      .attr('transform', (d) => `translate(0, ${yScale(d)})`)
+      .append('line')
+      .attr('x2', innerWidth)
+      .attr('stroke', '#c0c0bb')
+
+    // circle 
+    main.append('g')
+      .attr('class', 'mark')
       .selectAll('circle')
       .data(dataset)
       .enter()
       .append('circle')
-      .attr('r', 3)
-      .attr('cx', d => xScale(xValue(d)))
-      .attr('cy', d => yScale(yValue(d)))
+      .attr('r', 10)
+      .attr('cy', (d) => yScale(yValue(d)))
+      .attr('cx', (d) => xScale(xValue(d)))
+      .append('title')
+      .text((d) => yScale(yValue(d)))
+      .attr('fill', 'teal')
 
-    svg.append('g')
-      .selectAll('line')
-      .data()
+    // x-axis label
+    main.append('text')
+      .attr('class', 'text')
+      .text(xAxisLabel)
+      .attr('x', innerWidth / 2)
+      .attr('y', innerHeight + xlabelOffset)
+
+    // y-axis label
+    main.append('text')
+      .attr('class', 'text')
+      .text(yAxisLabel)
+      .attr('transform', `translate(${-ylabelOffset}, ${innerHeight / 2}) rotate(-90)`)
 
 
   })
