@@ -68,8 +68,6 @@ d3.csv(url)
       .attr('class', 'tick')
       .call(yAxis)
 
-
-
     // x-axis tick marks- vertical lines
     main.append('g')
       .selectAll('line')
@@ -119,5 +117,5 @@ d3.csv(url)
       .text(yAxisLabel)
       .attr('transform', `translate(${-ylabelOffset}, ${innerHeight / 2}) rotate(-90)`)
 
-
   })
+
