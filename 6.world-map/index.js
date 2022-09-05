@@ -15,7 +15,6 @@ d3.json(url)
     // const projection = d3.geoGnomonic()
     // const projection =  d3.geoOrthographic()
     // const projection = d3.geoStereographic()
-    // const projection = d3.geoEqualEarth()
     // const projection = d3.geoAlbersUsa()
     const path = d3.geoPath(projection)
 
