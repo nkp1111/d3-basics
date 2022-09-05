@@ -12,13 +12,12 @@ d3.csv(url)
       return item
     })
 
-    console.log('initial-dataset: ', dataset)
-    // data contains: petal_length, petal_width, sepal_length, sepal_width, species
+    // console.log('initial-dataset: ', dataset)
 
     // svg dimension
     const width = 800
     const height = 400
-    const margin = { top: 20, bottom: 45, left: 100, right: 20 }
+    const margin = { top: 20, bottom: 55, left: 100, right: 20 }
 
     // main-dimension for svg-child element
     const innerHeight = height - margin.top - margin.bottom
@@ -33,8 +32,8 @@ d3.csv(url)
     const yAxisLabel = 'Sepal Width'
 
     // label text offset
-    const xlabelOffset = 35
-    const ylabelOffset = 35
+    const xlabelOffset = 45
+    const ylabelOffset = 38
 
     const svg = d3.select('body')
       .append('svg')
@@ -55,12 +54,14 @@ d3.csv(url)
     // x-axis
     const xAxis = d3.axisBottom(xScale)
     svg.append('g')
+      .attr('class', 'tick')
       .attr('transform', `translate(${margin.left}, ${innerHeight + margin.top})`)
       .call(xAxis)
 
     // y-axis
     const yAxis = d3.axisLeft(yScale)
     svg.append('g')
+      .attr('class', 'tick')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
       .call(yAxis)
 
@@ -106,14 +107,14 @@ d3.csv(url)
 
     // x-axis label
     main.append('text')
-      .attr('class', 'text')
+      .attr('class', 'label')
       .text(xAxisLabel)
       .attr('x', innerWidth / 2)
       .attr('y', innerHeight + xlabelOffset)
 
     // y-axis label
     main.append('text')
-      .attr('class', 'text')
+      .attr('class', 'label')
       .text(yAxisLabel)
       .attr('transform', `translate(${-ylabelOffset}, ${innerHeight / 2}) rotate(-90)`)
 
