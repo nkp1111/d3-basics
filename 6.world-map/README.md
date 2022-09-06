@@ -2,7 +2,7 @@ The world map data has been taken from [unpkg of countries-50m file](https://unp
 
 for different specification visit https://unpkg.com/browse/world-atlas@2.0.2/
 
-![world-map](https://github.com/nkp1111/html-svg-d3-basics/blob/main/6.world-map/Screenshot%202022-09-06%20121419.png?raw=true)
+![world-map](https://github.com/nkp1111/html-svg-d3-basics/blob/main/6.world-map/Screenshot%202022-09-06%20121841.png?raw=true)
 
 Methods used-
 D3 :
