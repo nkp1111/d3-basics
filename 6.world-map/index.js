@@ -15,6 +15,8 @@ d3.json(url)
 
     const interiors = topojson.mesh(data, countries, (a, b) => a !== b)
 
+    const graticule = d3.geoGraticule()
+
     // svg dimension
     const width = 960
     const height = 640
@@ -30,6 +32,10 @@ d3.json(url)
     main.append('path')
       .attr('class', 'sphere')
       .attr('d', path({ type: 'Sphere' }))
+
+    main.append('path')
+      .attr('class', 'graticules')
+      .attr('d', path(graticule()))
 
     main.append('g')
       .selectAll('path')

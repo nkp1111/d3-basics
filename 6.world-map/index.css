@@ -16,7 +16,12 @@ body {
 
 .mark .interiors {
   fill: none;
-  stroke: #10b3bb;
+  stroke: #39d5dd;
+}
+
+.mark .graticules {
+  fill: none;
+  stroke: #c6c8cb;
 }
 
 .sphere {
