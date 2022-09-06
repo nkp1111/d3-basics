@@ -4,36 +4,49 @@ d3.json(url)
   .then(data => {
 
     console.log('intial_data: ', data);
-    const { countries } = data.objects
+    const { countries, land } = data.objects
 
-    const dataset = topojson.feature(data, countries)
-
-    console.log(dataset.features);
+    // const dataset = topojson.feature(data, countries)
+    const dataset = topojson.feature(data, land)
 
     const projection = d3.geoEqualEarth()
-    // const projection = d3.geoAzimuthalEquidistant()
-    // const projection = d3.geoGnomonic()
-    // const projection =  d3.geoOrthographic()
-    // const projection = d3.geoStereographic()
-    // const projection = d3.geoAlbersUsa()
+
     const path = d3.geoPath(projection)
 
+    const interiors = topojson.mesh(data, countries, (a, b) => a !== b)
+
     // svg dimension
-    const width = 800
-    const height = 500
+    const width = 960
+    const height = 640
 
     const svg = d3.select('body')
       .append('svg')
       .attr('width', width)
       .attr('height', height)
 
-    svg.append('g')
+    const main = svg.append('g')
       .attr('class', 'mark')
+
+    main.append('path')
+      .attr('class', 'sphere')
+      .attr('d', path({ type: 'Sphere' }))
+
+    main.append('g')
       .selectAll('path')
       .data(dataset.features)
       .enter()
       .append('path')
+      .attr('class', 'land')
       .attr('d', (d) => path(d))
+
+    main.append('path')
+      .attr('class', 'interiors')
+      .attr('d', d => path(interiors))
+
+
+
+
+
 
 
   })

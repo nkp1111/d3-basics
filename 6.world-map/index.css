@@ -10,27 +10,16 @@ body {
     sans-serif;
 }
 
-.mark {
+.mark .land {
   fill: #137B80;
 }
 
-.label {
-  text-anchor: middle;
-  font-size: 1.7em;
-  fill: #635F5D;
-  stroke: #635F5D;
-}
-
-.tick {
-  stroke: #635F5D;
-  ;
-  font-size: 1em;
-}
-
-.line-path {
-  stroke: #137B80;
+.mark .interiors {
   fill: none;
-  stroke-width: 3px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke: #10b3bb;
+}
+
+.sphere {
+  fill: #efefef;
+  stroke: none;
 }
