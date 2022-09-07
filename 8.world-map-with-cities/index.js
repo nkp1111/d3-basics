@@ -82,11 +82,6 @@ d3.json(worldUrl)
           .attr('opacity', 0.5)
           .attr('fill', '#137880')
 
-
-
-
-
       })
-
 
   })
