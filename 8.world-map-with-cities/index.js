@@ -9,7 +9,7 @@ d3.json(worldUrl)
     // const dataset = topojson.feature(data, countries)
     const dataset = topojson.feature(data, land)
 
-    const projection = d3.geoEqualEarth()
+    let projection = d3.geoEqualEarth()
 
     const path = d3.geoPath(projection)
 
@@ -18,10 +18,10 @@ d3.json(worldUrl)
     const graticule = d3.geoGraticule()
 
     // svg dimension
-    const width = 960
-    const height = 640
+    let width = 960
+    let height = 640
 
-    const svg = d3.select('body')
+    let svg = d3.select('body')
       .append('svg')
       .attr('width', width)
       .attr('height', height)
@@ -51,11 +51,42 @@ d3.json(worldUrl)
 
 
     d3.select('h1')
-      .style('margin-left', width / 2 + 'px')
+      .style('margin-left', innerWidth / 3 + 'px')
 
     const cityUrl = 'https://gist.githubusercontent.com/curran/13d30e855d48cdd6f22acdf0afe27286/raw/0635f14817ec634833bb904a47594cc2f5f9dbf8/worldcities_clean.csv'
 
+    d3.csv(cityUrl)
+      .then(data => {
 
+        const cityData = data.map(d => {
+          d.lat = +d.lat
+          d.lng = +d.lng
+          return d
+        })
+        // console.log(cityData);
+        const cityCoord = cityData.map(d => {
+          const [x, y] = projection([d.lng, d.lat])
+          d.lng = x
+          d.lat = y
+          return d
+        })
+
+        svg.append('g')
+          .selectAll('circle')
+          .data(cityCoord)
+          .enter()
+          .append('circle')
+          .attr('r', 2)
+          .attr('cx', (d) => d.lng)
+          .attr('cy', (d) => d.lat)
+          .attr('opacity', 0.5)
+          .attr('fill', '#137880')
+
+
+
+
+
+      })
 
 
   })
