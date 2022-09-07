@@ -3,7 +3,7 @@ const url = 'https://unpkg.com/world-atlas@2.0.2/countries-50m.json'
 d3.json(url)
   .then(data => {
 
-    console.log('intial_data: ', data);
+    // console.log('intial_data: ', data);
     const { countries, land } = data.objects
 
     // const dataset = topojson.feature(data, countries)
@@ -50,9 +50,6 @@ d3.json(url)
       .attr('d', d => path(interiors))
 
 
-
-
-
-
-
+    d3.select('h1')
+      .style('margin-left', width / 2 + 'px')
   })

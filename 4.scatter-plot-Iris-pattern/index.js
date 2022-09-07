@@ -101,7 +101,7 @@ d3.csv(url)
       .attr('cy', (d) => yScale(yValue(d)))
       .attr('cx', (d) => xScale(xValue(d)))
       .append('title')
-      .text((d) => yScale(yValue(d)))
+      .text((d) => `(${xValue(d)}, ${yValue(d)})`)
       .attr('fill', 'teal')
 
     // x-axis label
@@ -117,5 +117,8 @@ d3.csv(url)
       .text(yAxisLabel)
       .attr('transform', `translate(${-ylabelOffset}, ${innerHeight / 2}) rotate(-90)`)
 
+
+    d3.select('h1')
+      .style('margin-left', innerWidth / 2 + 'px')
   })
 

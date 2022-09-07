@@ -99,4 +99,6 @@ d3.csv(url)
       .attr('x', innerWidth / 2)
       .attr('y', innerHeight + labelOffset)
 
+    d3.select('h1')
+      .style('margin-left', width / 2 + 'px')
   })
