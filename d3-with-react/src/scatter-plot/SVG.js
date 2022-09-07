@@ -129,7 +129,7 @@ function SVG({ width, height, data }) {
           </g>
 
           <Marks
-            data={filteredData}
+            data={data}
             xScale={xScale}
             xValue={xValue}
             yScale={yScale}
