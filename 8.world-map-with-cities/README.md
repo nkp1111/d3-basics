@@ -10,3 +10,5 @@ Exclude cities smaller than 50,000
 Remove all rows except city,lat,lng,country,population.
 
 The dataset has been taken from https://gist.github.com/curran
+
+![image](https://user-images.githubusercontent.com/105532413/188809008-b09e5831-ab92-450b-998b-0f89d4c3f9e6.png)
