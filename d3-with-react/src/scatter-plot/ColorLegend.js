@@ -6,24 +6,28 @@ function ColorLegend({
   tickSpacing = 30,
   legendXOffset = 20,
   onHover,
+  hoveredValue,
+  fadeOpacity
 }) {
   return (
     <>
-      {colorScale.domain().map((color, ind) => {
+      {colorScale.domain().map((species, ind) => {
         return (
           <g
             transform={`translate(-20, ${tickSpacing * (ind + 1)})`}
             className='legend'
-            onMouseEnter={() => onHover(color)}
+            onMouseEnter={() => onHover(species)}
+            onMouseOut={() => onHover(null)}
             key={ind}
+            opacity={hoveredValue && species !== hoveredValue ? fadeOpacity : 1}
           >
             <circle
               r={circleRadius}
-              fill={colorScale(color)}
+              fill={colorScale(species)}
             ></circle>
             <text
               x={legendXOffset}
-              dy='0.32em'>{color}</text>
+              dy='0.32em'>{species}</text>
           </g>
         )
       })

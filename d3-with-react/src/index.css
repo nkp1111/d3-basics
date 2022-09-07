@@ -56,6 +56,11 @@ svg {
   font-size: 1em;
 }
 
+/* Legend */
 .legend {
   fill: #635F5D;
+}
+
+.legend:hover {
+  cursor: default;
 }

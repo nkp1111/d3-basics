@@ -52,6 +52,7 @@ function SVG({ width, height, data }) {
   const filteredData = data.filter(d => hoveredValue === colorValue(d))
 
   const circleRadius = 7
+  const fadeOpacity = 0.2
 
   // legend
   const legendYOffset = 20 // between circle and text
@@ -124,12 +125,26 @@ function SVG({ width, height, data }) {
               circleRadius={circleRadius}
               tickSpacing={legendYOffset}
               legendXOffset={legendXOffset}
-              onHover={(color) => setHoveredValue(color)}
+              onHover={(species) => setHoveredValue(species)}
+              hoveredValue={hoveredValue}
+              fadeOpacity={fadeOpacity}
             />
           </g>
 
+          <g opacity={hoveredValue ? fadeOpacity : 1}>
+            <Marks
+              data={data}
+              xScale={xScale}
+              xValue={xValue}
+              yScale={yScale}
+              yValue={yValue}
+              colorScale={colorScale}
+              colorValue={colorValue}
+              circleRadius={circleRadius} />
+          </g>
+
           <Marks
-            data={data}
+            data={filteredData}
             xScale={xScale}
             xValue={xValue}
             yScale={yScale}
