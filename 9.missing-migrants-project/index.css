@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins',
+    sans-serif;
+}
+
+.mark {
+  fill: #137B80;
+}
+
+.label {
+  text-anchor: middle;
+  font-size: 1.7em;
+  fill: #9a9796;
+  stroke: #aaa39f;
+}
+
+.tick {
+  stroke: #c4bebb;
+  font-size: 1em;
+}
+
+.line-path {
+  stroke: #137B80;
+  fill: none;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
