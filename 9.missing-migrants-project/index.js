@@ -12,7 +12,7 @@ d3.csv(url)
       return d
     })
 
-    // console.log('initial data: ', dataset[0])
+    console.log('initial data: ', dataset)
 
     // svg dimension
     const width = 800
