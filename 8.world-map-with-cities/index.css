@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins',
+    sans-serif;
+}
+
+.mark .land {
+  fill: #137B80;
+}
+
+.mark .interiors {
+  fill: none;
+  stroke: #39d5dd;
+}
+
+.mark .graticules {
+  fill: none;
+  stroke: #c6c8cb;
+}
+
+.sphere {
+  fill: #efefef;
+  stroke: none;
+}
