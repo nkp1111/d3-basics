@@ -1,6 +1,5 @@
 const url = 'https://gist.githubusercontent.com/curran/a9656d711a8ad31d812b8f9963ac441c/raw/c22144062566de911ba32509613c84af2a99e8e2/MissingMigrants-Global-2019-10-08T09-47-14-subset.csv'
 
-console.log(d3);
 d3.csv(url)
   .then(data => {
 
@@ -13,12 +12,12 @@ d3.csv(url)
       return d
     })
 
-    console.log('initial data: ', dataset[0])
+    // console.log('initial data: ', dataset[0])
 
     // svg dimension
     const width = 800
     const height = 500
-    const margin = { top: 20, bottom: 55, left: 80, right: 20 }
+    const margin = { top: 20, bottom: 55, left: 85, right: 40 }
 
     // main-dimension for svg-child element
     const innerHeight = height - margin.top - margin.bottom
@@ -34,7 +33,7 @@ d3.csv(url)
 
     // label text offset
     const xlabelOffset = 45
-    const ylabelOffset = 45
+    const ylabelOffset = 55
 
     const circleRadius = 2
 
@@ -52,13 +51,6 @@ d3.csv(url)
       .domain(d3.extent(dataset, xValue))
       .range([0, innerWidth])
       .nice()
-
-    // y-scale
-    const yScale = d3.scaleLinear()
-      .domain(d3.extent(dataset, yValue))
-      .range([innerHeight, 0])
-      .nice()
-
     //x-axis
     const xAxis = d3.axisBottom(xScale)
       .tickFormat((d) => format(d))
@@ -68,6 +60,26 @@ d3.csv(url)
       .attr('class', 'tick')
       .call(xAxis)
 
+    const [start, stop] = xScale.domain()
+
+    //bin 
+    const binData = d3.bin()
+      .value(xValue)
+      .domain(xScale.domain())
+      .thresholds(d3.timeMonths(start, stop))(dataset)
+      .map(arr => {
+        return {
+          y: d3.sum(arr, yValue),
+          x0: arr.x0,
+          x1: arr.x1
+        }
+      })
+
+    // y-scale
+    const yScale = d3.scaleLinear()
+      .domain(d3.extent(binData, (d) => d.y))
+      .range([innerHeight, 0])
+      .nice()
     // y-axis 
     const yAxis = d3.axisLeft(yScale)
 
@@ -100,15 +112,16 @@ d3.csv(url)
     // circle
     main.append('g')
       .attr('class', 'mark')
-      .selectAll('circle')
-      .data(dataset)
+      .selectAll('rect')
+      .data(binData)
       .enter()
-      .append('circle')
-      .attr('r', circleRadius)
-      .attr('cy', (d) => yScale(yValue(d)))
-      .attr('cx', (d) => xScale(xValue(d)))
+      .append('rect')
+      .attr('height', (d) => innerHeight - yScale(d.y))
+      .attr('y', (d) => yScale(d.y))
+      .attr('x', (d) => xScale(d.x0))
+      .attr('width', (d) => xScale(d.x1) - xScale(d.x0))
       .append('title')
-      .text((d) => `(${xValue(d)}, ${yValue(d)})`)
+      .text((d) => d.y)
 
     // x-axis label
     main.append('text')
@@ -125,5 +138,5 @@ d3.csv(url)
 
 
     d3.select('h1')
-      .style('margin-left', width / 2 + 'px')
+      .style('margin-left', innerWidth / 3 + 'px')
   })
