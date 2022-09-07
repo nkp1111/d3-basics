@@ -61,8 +61,10 @@ d3.json(worldUrl)
         const cityData = data.map(d => {
           d.lat = +d.lat
           d.lng = +d.lng
+          d.population = +d.population
           return d
         })
+
         // console.log(cityData);
         const cityCoord = cityData.map(d => {
           const [x, y] = projection([d.lng, d.lat])
@@ -71,14 +73,27 @@ d3.json(worldUrl)
           return d
         })
 
+        // data column (long. , lat.)
+        const xValue = d => d.lng
+        const yValue = d => d.lat
+
+        // radius
+        const MaxRadius = 15
+        const radiusValue = d => d.population
+
+        // scale for radius
+        const radiusScale = d3.scaleSqrt()
+          .domain([0, d3.max(cityCoord, radiusValue)])
+          .range([0, MaxRadius])
+
         svg.append('g')
           .selectAll('circle')
           .data(cityCoord)
           .enter()
           .append('circle')
-          .attr('r', 2)
-          .attr('cx', (d) => d.lng)
-          .attr('cy', (d) => d.lat)
+          .attr('r', (d) => radiusScale(radiusValue(d)))
+          .attr('cx', xValue)
+          .attr('cy', yValue)
           .attr('opacity', 0.5)
           .attr('fill', '#137880')
 

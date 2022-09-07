@@ -11,17 +11,17 @@ body {
 }
 
 .mark .land {
-  fill: #d8d8d8d8;
+  fill: #ececec;
 }
 
 .mark .interiors {
   fill: none;
-  stroke: #c3c3c3;
+  stroke: #d9dfe0;
 }
 
 .mark .graticules {
   fill: none;
-  stroke: #dadada;
+  stroke: #ececec;
 }
 
 .sphere {
