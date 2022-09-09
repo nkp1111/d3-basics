@@ -94,7 +94,7 @@ d3.csv(url)
       .append('line')
       .attr('x2', innerWidth)
 
-    // rect
+    // circle
     main.append('g')
       .attr('class', 'mark')
       .selectAll('circle')
