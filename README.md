@@ -1,5 +1,2 @@
-This is following the **Data Visualization with D3, JavaScript, React - Full Course [2021]**
+This is made while completing a course on D3 library
 
-Created by **Curran Kelleher**
-
-For more info - visit https://youtu.be/2LhoCfjm8R4
